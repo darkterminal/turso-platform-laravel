@@ -1,0 +1,61 @@
+{
+    "name": "darkterminal/turso-platform-laravel",
+    "description": "Laravel integration for the Turso Platform API PHP SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Imam Ali Mustofa",
+            "email": "darkterminal@duck.com",
+            "role": "Software Freestyle Engineer",
+            "homepage": "https://github.com/darkterminal"
+        }
+    ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/darkterminal"
+        },
+        {
+            "type": "other",
+            "url": "https://saweria.co/darkterminal"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "darkterminal/turso-api-client-php": "^2.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0",
+        "pestphp/pest": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Darkterminal\\TursoPlatformLaravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Darkterminal\\TursoPlatformLaravel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Darkterminal\\TursoPlatformLaravel\\TursoPlatformServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": [
+            "./vendor/bin/pest"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "platform": {
+            "php": "8.3"
+        }
+    }
+}

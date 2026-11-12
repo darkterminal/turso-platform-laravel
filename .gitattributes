@@ -1,0 +1,13 @@
+# Export-ignore: files that should not ship in the compiled archive
+/.gitignore       export-ignore
+/.gitattributes   export-ignore
+/.github          export-ignore
+/tests            export-ignore
+/phpunit.xml.dist export-ignore
+/composer.lock    export-ignore
+/CHANGELOG.md     export-ignore
+/CONTRIBUTING.md  export-ignore
+
+# LF for PHP and text files
+*.php text eol=lf
+*.md text eol=lf

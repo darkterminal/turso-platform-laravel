@@ -1,0 +1,7 @@
+vendor/
+.env
+.phpunit.cache
+.phpstan
+workbench/skeleton/build
+workbench/skeleton/node_modules
+workbench/skeleton/vendor
