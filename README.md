@@ -25,7 +25,7 @@
 
 Laravel integration for `darkterminal/turso-api-client-php` — exposes the Turso Platform API as a pre-configured shared client: publishable config, auto-discovered Service Provider, and a Facade so calls read naturally in Laravel apps.
 
-Latest release: **v1.0.0** (2026-11-12). PHP 8.3+ · Laravel 12+.
+Latest release: **v1.1.0** (2026-11-12). PHP 8.3+ · Laravel 12+.
 
 ## Requirements
 
