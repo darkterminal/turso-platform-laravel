@@ -21,7 +21,7 @@ Laravel integration for `darkterminal/turso-api-client-php` — exposes the Turs
 | Component | Version |
 |---|---|
 | PHP | 8.3+ |
-| Laravel | 11 or 12 |
+| Laravel | 12+ |
 | `darkterminal/turso-api-client-php` | `^2.0` (auto-installed) |
 
 ## Installation

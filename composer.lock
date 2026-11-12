@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f93f53bf86d9133b408ef36aace6511c",
+    "content-hash": "6d64ec4a1572709c2b04796fbc280b15",
     "packages": [
         {
             "name": "darkterminal/turso-api-client-php",
