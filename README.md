@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img alt="Turso Platform API + Laravel" src="https://i.imgur.com/dpml6YK.png" width="1000">
+  <img alt="Turso Platform API for Laravel" src="art/TursoPlatformAPIforLaravel.png" width="1000">
 </p>
 
 # Turso Platform API for Laravel

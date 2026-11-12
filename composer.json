@@ -22,11 +22,12 @@
     ],
     "require": {
         "php": "^8.3",
-        "darkterminal/turso-api-client-php": "^2.0"
+        "darkterminal/turso-api-client-php": "^2.1"
     },
     "require-dev": {
         "orchestra/testbench": "^9.0 || ^10.0",
-        "pestphp/pest": "^3.0"
+        "pestphp/pest": "^3.0",
+        "phpstan/phpstan": "^2.3"
     },
     "autoload": {
         "psr-4": {
@@ -48,6 +49,9 @@
     "scripts": {
         "test": [
             "./vendor/bin/pest"
+        ],
+        "analyse": [
+            "./vendor/bin/phpstan analyse --memory-limit=1G"
         ]
     },
     "config": {

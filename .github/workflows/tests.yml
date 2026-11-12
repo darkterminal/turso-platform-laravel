@@ -41,3 +41,6 @@ jobs:
         env:
           TURSO_PLATFORM_API_TOKEN: token-for-ci-resolution-unauthenticated
         run: vendor/bin/pest
+
+      - name: Static analysis (PHPStan)
+        run: vendor/bin/phpstan analyse --memory-limit=1G

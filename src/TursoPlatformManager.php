@@ -43,8 +43,8 @@ final class TursoPlatformManager
     /** Token read from config each call so .env changes are reflected without cache flushes. */
     private function token(): string
     {
-        $token = getenv('TURSO_PLATFORM_API_TOKEN') ?? '';
-        if ($token === '') {
+        $token = getenv('TURSO_PLATFORM_API_TOKEN');
+        if (!is_string($token) || $token === '') {
             throw new \Darkterminal\TursoPlatformAPI\Exceptions\ConfigurationException(
                 'TURSO_PLATFORM_API_TOKEN is not set. Publish the package config and populate the token.',
             );

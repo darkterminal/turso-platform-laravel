@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d64ec4a1572709c2b04796fbc280b15",
+    "content-hash": "b1de7e9723609292fa709115bb327484",
     "packages": [
         {
             "name": "darkterminal/turso-api-client-php",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darkterminal/turso-api-client-php.git",
-                "reference": "80d06b318fc34bc14cf887f443c0708a9ce53357"
+                "reference": "d922bc02232c8cff3a12224b342d8b0914f96c04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darkterminal/turso-api-client-php/zipball/80d06b318fc34bc14cf887f443c0708a9ce53357",
-                "reference": "80d06b318fc34bc14cf887f443c0708a9ce53357",
+                "url": "https://api.github.com/repos/darkterminal/turso-api-client-php/zipball/d922bc02232c8cff3a12224b342d8b0914f96c04",
+                "reference": "d922bc02232c8cff3a12224b342d8b0914f96c04",
                 "shasum": ""
             },
             "require": {
@@ -30,7 +30,9 @@
                 "psr/http-message": "^1.0 || ^2.0"
             },
             "require-dev": {
-                "pestphp/pest": "^3.0"
+                "pestphp/pest": "^3.0",
+                "phpstan/phpstan": "^2.3",
+                "phpstan/phpstan-phpunit": "^2.1"
             },
             "type": "library",
             "autoload": {
@@ -53,7 +55,7 @@
             "description": "Turso Platform PHP SDK — typed client for the Turso Platform API",
             "support": {
                 "issues": "https://github.com/darkterminal/turso-api-client-php/issues",
-                "source": "https://github.com/darkterminal/turso-api-client-php/tree/v2.0.0"
+                "source": "https://github.com/darkterminal/turso-api-client-php/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -65,7 +67,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-11-12T10:36:47+00:00"
+            "time": "2026-11-12T12:19:47+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -4852,6 +4854,70 @@
                 "source": "https://github.com/phpstan/phpdoc-parser/tree/2.4.1"
             },
             "time": "2026-10-30T19:36:28+00:00"
+        },
+        {
+            "name": "phpstan/phpstan",
+            "version": "2.3.5",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/645a1bd6bead15fc1b8474137467961d0fa30a79",
+                "reference": "645a1bd6bead15fc1b8474137467961d0fa30a79",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-11-03T12:14:22+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
