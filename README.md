@@ -22,7 +22,7 @@ Laravel integration for `darkterminal/turso-api-client-php` — exposes the Turs
 |---|---|
 | PHP | 8.3+ |
 | Laravel | 12+ |
-| `darkterminal/turso-api-client-php` | `^2.0` (auto-installed) |
+| `darkterminal/turso-api-client-php` | `^2.1` (auto-installed) |
 
 ## Installation
 
@@ -78,6 +78,13 @@ use Darkterminal\TursoPlatformLaravel\TursoPlatformManager;
 $client = app(TursoPlatformManager::class)->client();
 $databases = $client->databases()->list();
 ```
+
+## Documentation
+
+- [Facade map](docs/facade-map.md) — full resource inventory, env→builder mapping, contract quirks
+- [Architecture notes](docs/architecture.md) — container pipeline, bindings, lazy resolution, quality gates
+- [Troubleshooting](docs/troubleshooting.md) — `TURSO_PLATFORM_API_TOKEN`, publish tag, v3 recovery UUID, config cache
+- [CHANGELOG](CHANGELOG.md)
 
 ## Security notes
 

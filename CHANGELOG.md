@@ -16,6 +16,7 @@ All notable changes to this project are documented in this file. The format is b
 
 - PHPStan (`level 6`) with `phpstan.neon`; `composer analyse` script; CI (`.github/workflows/tests.yml`) now runs pest + PHPStan on every matrix leg (PHP 8.3/8.4/8.5 × Laravel 12).
 - `art/TursoPlatformAPIforLaravel.png` — package banner; README now references the local file instead of the external imgur banner.
+- `docs/` — `facade-map.md`, `architecture.md`, `troubleshooting.md`; README gains a Documentation section. Identical content mirrored to the GitHub wiki (Home, Facade-Map, Architecture, Troubleshooting).
 
 ## [1.0.0] — Released 2026-11-12
 
