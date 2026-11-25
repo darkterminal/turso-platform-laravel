@@ -1,0 +1,37 @@
+title: Turso Platform for Laravel
+tagline: Laravel integration for the Turso Platform API PHP SDK
+description: >-
+  Turso Platform for Laravel exposes the Turso Platform API as a pre-configured
+  shared client: publishable config, auto-discovered service provider, and a
+  facade for managing organizations, databases, groups, tokens, members, invites,
+  audit logs, and recovery from Laravel applications.
+url: https://darkterminal.github.io
+baseurl: /turso-platform-laravel
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+permalink: pretty
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .jekyll-cache
+  - _site
+  - architecture.md
+  - facade-map.md
+  - troubleshooting.md
+
+defaults:
+  - scope:
+      path: "user-manual"
+    values:
+      layout: manual
