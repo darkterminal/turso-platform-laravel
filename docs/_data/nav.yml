@@ -1,0 +1,33 @@
+- title: Overview
+  url: /user-manual/
+  section: Introduction
+- title: Getting started
+  url: /user-manual/getting-started/
+  section: Introduction
+- title: Configuration
+  url: /user-manual/configuration/
+  section: Guide
+- title: Facade and container usage
+  url: /user-manual/facade-and-container/
+  section: Guide
+- title: Databases and groups
+  url: /user-manual/databases-and-groups/
+  section: Resources
+- title: Organizations, members, and invites
+  url: /user-manual/organizations-members-invites/
+  section: Resources
+- title: Tokens, audit logs, and recovery
+  url: /user-manual/tokens-audit-recovery/
+  section: Resources
+- title: Integrations
+  url: /user-manual/integrations/
+  section: Guide
+- title: Errors and troubleshooting
+  url: /user-manual/errors-troubleshooting/
+  section: Reference
+- title: Facade map
+  url: /user-manual/reference/facade-map/
+  section: Reference
+- title: Architecture
+  url: /user-manual/reference/architecture/
+  section: Reference
