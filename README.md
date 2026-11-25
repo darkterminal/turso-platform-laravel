@@ -21,11 +21,22 @@
   <a href="https://github.com/darkterminal/turso-platform-laravel/tags"><img src="https://img.shields.io/github/v/tag/darkterminal/turso-platform-laravel?label=version&color=F05340" alt="Version Tag" /></a>
 </p>
 
-# Turso Platform API for Laravel
+# Turso Platform for Laravel
 
-Laravel integration for `darkterminal/turso-api-client-php` — exposes the Turso Platform API as a pre-configured shared client: publishable config, auto-discovered Service Provider, and a Facade so calls read naturally in Laravel apps.
+Laravel integration for [`darkterminal/turso-api-client-php`](https://github.com/darkterminal/turso-api-client-php) — exposes the Turso Platform API as a pre-configured shared client with publishable config, auto-discovered service provider, and a Facade.
 
-Latest release: **v1.1.0** (2026-11-12). PHP 8.3+ · Laravel 12+.
+This package is a **thin wiring layer**. HTTP, request/response contracts, validation, and typed exceptions live in the core SDK. Use it to manage Turso Platform control-plane resources from Laravel apps: databases, groups, organizations, members, invites, API tokens, audit logs, and recovery.
+
+> This package is for Platform API automation, not SQL/data-plane queries. For database queries, use a libSQL/Turso database client.
+
+## Documentation
+
+- **Docs site / User manual**: [darkterminal.github.io/turso-platform-laravel](https://darkterminal.github.io/turso-platform-laravel/)
+- **Getting started**: [User manual — Getting started](https://darkterminal.github.io/turso-platform-laravel/user-manual/getting-started/)
+- **Configuration**: [User manual — Configuration](https://darkterminal.github.io/turso-platform-laravel/user-manual/configuration/)
+- **Facade map**: [User manual — Facade map](https://darkterminal.github.io/turso-platform-laravel/user-manual/reference/facade-map/)
+- **Repo docs**: [`docs/`](docs/), [`docs/facade-map.md`](docs/facade-map.md), [`docs/architecture.md`](docs/architecture.md), [`docs/troubleshooting.md`](docs/troubleshooting.md)
+- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
 ## Requirements
 
@@ -33,7 +44,7 @@ Latest release: **v1.1.0** (2026-11-12). PHP 8.3+ · Laravel 12+.
 |---|---|
 | PHP | 8.3+ |
 | Laravel | 12+ |
-| `darkterminal/turso-api-client-php` | `^2.1` (auto-installed) |
+| `darkterminal/turso-api-client-php` | `^2.1` (installed by Composer) |
 
 ## Installation
 
@@ -41,47 +52,51 @@ Latest release: **v1.1.0** (2026-11-12). PHP 8.3+ · Laravel 12+.
 composer require darkterminal/turso-platform-laravel
 ```
 
-The Service Provider and Facade are auto-discovered. No manual registration needed.
+The service provider and facade are auto-discovered. No manual registration is required.
 
 ## Configuration
 
+Set environment variables:
+
 ```dotenv
-TURSO_PLATFORM_API_TOKEN=your-platform-api-jwt
-TURSO_PLATFORM_ORGANIZATION=your-org-slug       # optional
-TURSO_PLATFORM_ORGANIZATION_ID=your-org-uuid    # required for v3 recovery operations
-TURSO_PLATFORM_BASE_URL=https://api.turso.tech  # optional override
+TURSO_PLATFORM_API_TOKEN=your-platform-api-token
+TURSO_PLATFORM_ORGANIZATION=your-org-slug          # optional, required for most org-scoped resources
+TURSO_PLATFORM_ORGANIZATION_ID=your-org-uuid       # optional, required for v3 recovery
+TURSO_PLATFORM_BASE_URL=https://api.turso.tech      # optional
+TURSO_PLATFORM_TIMEOUT=20                           # optional, seconds
 ```
 
-Publish the config if you need to customize:
+Publish the config if you need to customize defaults:
 
 ```bash
 php artisan vendor:publish --provider="Darkterminal\TursoPlatformLaravel\TursoPlatformServiceProvider" --tag=turso-platform-config
 ```
 
+> The Platform API token is read from `TURSO_PLATFORM_API_TOKEN` at resolution time. It is intentionally not stored in the published config file.
+
 ## Usage
 
-### Via Facade
+### Facade
 
 ```php
 use Darkterminal\TursoPlatformLaravel\TursoPlatform;
 
 $databases = TursoPlatform::databases()->list();
-$token     = TursoPlatform::databases()->createToken('main', 'never', \Darkterminal\TursoPlatformAPI\Enums\Authorization::FULL_ACCESS);
+$user = TursoPlatform::user()->get();
 ```
 
-### Via container injection
+### Container injection
 
 ```php
 use Darkterminal\TursoPlatformAPI\Client\Client;
 
 public function index(Client $client)
 {
-    $databases = $client->databases()->list();
-    // ...
+    return $client->databases()->list();
 }
 ```
 
-### Via manager
+### Manager
 
 ```php
 use Darkterminal\TursoPlatformLaravel\TursoPlatformManager;
@@ -90,30 +105,57 @@ $client = app(TursoPlatformManager::class)->client();
 $databases = $client->databases()->list();
 ```
 
-## Uploading a SQLite dump
+## Resources
 
-Uploads ship with the SDK (`darkterminal/turso-api-client-php`), not this package:
+The facade maps 1:1 to the SDK client resources:
+
+| Facade | Purpose |
+|---|---|
+| `TursoPlatform::user()` | Current user |
+| `TursoPlatform::auth()` | Token validation |
+| `TursoPlatform::locations()` | Available locations |
+| `TursoPlatform::organizations()` | Organizations, plans, invoices, subscription, usage |
+| `TursoPlatform::members()` | Organization members |
+| `TursoPlatform::invites()` | Organization invites |
+| `TursoPlatform::databases()` | Databases, config, instances, tokens, usage, stats |
+| `TursoPlatform::groups()` | Groups, locations, config, tokens, transfer/unarchive |
+| `TursoPlatform::apiTokens()` | Personal Platform API tokens |
+| `TursoPlatform::organizationApiTokens()` | Organization-scoped Platform API tokens |
+| `TursoPlatform::auditLogs()` | Organization audit logs |
+| `TursoPlatform::recovery()` | v3 deleted database/group recovery (requires org UUID) |
+
+See the full [Facade map](https://darkterminal.github.io/turso-platform-laravel/user-manual/reference/facade-map/) and the upstream [SDK API map](https://github.com/darkterminal/turso-api-client-php/blob/main/docs/api-map.md) for method-level signatures.
+
+## SDK integrations
+
+Standalone SDK integrations can be used directly alongside this package:
 
 ```php
 use Darkterminal\TursoPlatformAPI\Integrations\DatabaseUploader;
 
-// Host and token come from a database created with seed.type='database_upload'.
-$uploader = new DatabaseUploader($hostname, $databaseToken);
-$body = $uploader->uploadDump('/path/to/dump.db');  // WAL, page_size=4096, auto_vacuum=0, UTF-8
+$uploader = DatabaseUploader::create(
+    baseUrl: config('turso-platform.base_url'),
+    organization: config('turso-platform.organization'),
+    token: env('TURSO_PLATFORM_API_TOKEN'),
+);
 ```
 
-## Documentation
+Check the SDK docs for the exact integration signatures in your installed version.
 
-- [Facade map](docs/facade-map.md) — full resource inventory, env→builder mapping, contract quirks
-- [Architecture notes](docs/architecture.md) — container pipeline, bindings, lazy resolution, quality gates
-- [Troubleshooting](docs/troubleshooting.md) — `TURSO_PLATFORM_API_TOKEN`, publish tag, v3 recovery UUID, config cache
-- [CHANGELOG](CHANGELOG.md)
-- [Wiki](https://github.com/darkterminal/turso-platform-laravel/wiki) — the same content rendered for GitHub browsing (Home, Facade Map, Architecture, Troubleshooting)
+## Troubleshooting
+
+Common issues are covered in the [Errors and troubleshooting](https://darkterminal.github.io/turso-platform-laravel/user-manual/errors-troubleshooting/) manual page, including:
+
+- missing `TURSO_PLATFORM_API_TOKEN`;
+- v3 recovery requiring `TURSO_PLATFORM_ORGANIZATION_ID` (UUID, not slug);
+- 401/403 from using the wrong token type;
+- config publish tag and package discovery.
 
 ## Security notes
 
-- `TURSO_PLATFORM_API_TOKEN` is only attached as a Bearer header to requests bound for the configured base URL. It is never attached to upload or resolver hosts (those are separate integrations handled by `darkterminal/turso-api-client-php`).
-- See `turso-api-client-php` for the full set of retry/timeout/error behaviors and the contract-aligned exception hierarchy.
+- `TURSO_PLATFORM_API_TOKEN` is read from the environment and attached only to configured Platform API requests by the SDK.
+- Do not put the Platform API token in published config files.
+- Protect routes/actions that manage tokens, members, invites, or recovery with Laravel authorization.
 
 ## Contributors
 
